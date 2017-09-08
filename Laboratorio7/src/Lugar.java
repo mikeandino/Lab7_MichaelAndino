@@ -9,7 +9,7 @@ public class Lugar {
     private long nhabitantes;
     private String zona;
     private Date fundacion;
-    private ArrayList<Persona> habitantes = new ArrayList<>();
+    private ArrayList<Persona> habitantes = new ArrayList();
 
     public Lugar() {
     }
@@ -79,6 +79,9 @@ public class Lugar {
         this.habitantes = habitantes;
     }
 
+    public void addHabitantes(Persona persona) {
+        this.habitantes.add(persona);
+    }
     @Override
     public String toString() {
         return nombre;

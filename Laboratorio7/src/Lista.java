@@ -14,8 +14,12 @@ public class Lista extends javax.swing.JFrame {
      * Creates new form Lista
      */
     public Lista(Lugar lugar) {
-        initComponents();
         this.lugar = lugar;
+        initComponents();
+        at = new administradorLista(jTable1);
+        ah = new administradorHabitantes();
+        at.start();
+        ah.start();
     }
 
     /**
@@ -31,7 +35,7 @@ public class Lista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText(lugar.toString());
@@ -91,7 +95,9 @@ public class Lista extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-    Lugar lugar;
+    static Lugar lugar;
+    administradorLista at;
+    administradorHabitantes ah;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

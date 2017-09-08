@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class administradorLista extends Thread {
 
+    
     private JTable tabla;
 
     public administradorLista(JTable tabla) {
@@ -14,10 +15,17 @@ public class administradorLista extends Thread {
     @Override
     public void run() {
         while (true) {
-            DefaultTableModel m = (DefaultTableModel)tabla.getModel();
-            for (Persona p : Laboratorio7.lugares.get(MIN_PRIORITY).getHabitantes()) {
-                Object[] newrow = {p.getNombre(),p.getId(),p.getLugar(),p.getEdad(),p.getEstatura(),p.getProfesion()};
-                m.addRow(newrow);
+            if (Lista.lugar.getHabitantes().size() >= 1) {
+                DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                for (Persona p : Lista.lugar.getHabitantes()) {
+                    Object[] newrow = {p.getNombre(), p.getId(), p.getLugar(), p.getEdad(), p.getEstatura(), p.getProfesion()};
+                    m.addRow(newrow);
+                }
+                tabla.setModel(m);
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                }
             }
         }
     }
