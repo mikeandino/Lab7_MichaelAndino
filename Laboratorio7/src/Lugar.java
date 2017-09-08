@@ -1,22 +1,24 @@
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Lugar {
     private String nombre;
     private String clima; 
     private long extension;
-    private long habitantes;
+    private long nhabitantes;
     private String zona;
-    private Date fundacion; 
+    private Date fundacion;
+    private ArrayList<Persona> habitantes = new ArrayList<>();
 
     public Lugar() {
     }
 
-    public Lugar(String nombre, String clima, long extension, long habitantes, String zona, Date fundacion) {
+    public Lugar(String nombre, String clima, long extension, long nhabitantes, String zona, Date fundacion) {
         this.nombre = nombre;
         this.clima = clima;
         this.extension = extension;
-        this.habitantes = habitantes;
+        this.nhabitantes = nhabitantes;
         this.zona = zona;
         this.fundacion = fundacion;
     }
@@ -45,12 +47,12 @@ public class Lugar {
         this.extension = extension;
     }
 
-    public long getHabitantes() {
-        return habitantes;
+    public long getNhabitantes() {
+        return nhabitantes;
     }
 
-    public void setHabitantes(long habitantes) {
-        this.habitantes = habitantes;
+    public void setNhabitantes(long nhabitantes) {
+        this.nhabitantes = nhabitantes;
     }
 
     public String getZona() {
@@ -67,6 +69,14 @@ public class Lugar {
 
     public void setFundacion(Date fundacion) {
         this.fundacion = fundacion;
+    }
+
+    public ArrayList<Persona> getHabitantes() {
+        return habitantes;
+    }
+
+    public void setHabitantes(ArrayList<Persona> habitantes) {
+        this.habitantes = habitantes;
     }
 
     @Override

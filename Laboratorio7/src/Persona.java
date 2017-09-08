@@ -34,8 +34,8 @@ public class Persona {
         this.id = id;
     }
 
-    public Lugar getLugar() {
-        return lugar;
+    public String getLugar() {
+        return lugar.toString();
     }
 
     public void setLugar(Lugar lugar) {
