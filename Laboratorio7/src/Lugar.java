@@ -6,10 +6,9 @@ public class Lugar {
     private String nombre;
     private String clima; 
     private long extension;
-    private long nhabitantes;
+    private long habitantes;
     private String zona;
     private Date fundacion;
-    private ArrayList<Persona> habitantes = new ArrayList();
 
     public Lugar() {
     }
@@ -18,7 +17,7 @@ public class Lugar {
         this.nombre = nombre;
         this.clima = clima;
         this.extension = extension;
-        this.nhabitantes = nhabitantes;
+        this.habitantes = nhabitantes;
         this.zona = zona;
         this.fundacion = fundacion;
     }
@@ -47,12 +46,12 @@ public class Lugar {
         this.extension = extension;
     }
 
-    public long getNhabitantes() {
-        return nhabitantes;
+    public long getHabitantes() {
+        return habitantes;
     }
 
-    public void setNhabitantes(long nhabitantes) {
-        this.nhabitantes = nhabitantes;
+    public void setHabitantes(long nhabitantes) {
+        this.habitantes = nhabitantes;
     }
 
     public String getZona() {
@@ -71,17 +70,6 @@ public class Lugar {
         this.fundacion = fundacion;
     }
 
-    public ArrayList<Persona> getHabitantes() {
-        return habitantes;
-    }
-
-    public void setHabitantes(ArrayList<Persona> habitantes) {
-        this.habitantes = habitantes;
-    }
-
-    public void addHabitantes(Persona persona) {
-        this.habitantes.add(persona);
-    }
     @Override
     public String toString() {
         return nombre;

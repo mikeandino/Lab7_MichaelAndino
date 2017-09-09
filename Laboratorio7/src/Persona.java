@@ -1,7 +1,12 @@
-public class Persona {
+
+import java.io.Serializable;
+
+public class Persona implements Serializable {
+
+    public final long SerializableUID = 222L;
     private String nombre;
     private String id;
-    private Lugar lugar;
+    private String lugar;
     private int edad;
     private String estatura;
     private String profesion;
@@ -9,7 +14,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String id, Lugar lugar, int edad, String estatura, String profesion) {
+    public Persona(String nombre, String id, String lugar, int edad, String estatura, String profesion) {
         this.nombre = nombre;
         this.id = id;
         this.lugar = lugar;
@@ -38,7 +43,7 @@ public class Persona {
         return lugar.toString();
     }
 
-    public void setLugar(Lugar lugar) {
+    public void setLugar(String lugar) {
         this.lugar = lugar;
     }
 

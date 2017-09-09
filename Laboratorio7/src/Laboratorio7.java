@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author henry
@@ -20,6 +19,7 @@ public class Laboratorio7 extends javax.swing.JFrame {
      */
     public Laboratorio7() {
         initComponents();
+        ap.cargarArchivo();
     }
 
     /**
@@ -46,8 +46,8 @@ public class Laboratorio7 extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -86,8 +86,6 @@ public class Laboratorio7 extends javax.swing.JFrame {
 
         jLabel15.setText("Profesion");
 
-        jButton1.setText("Cargar");
-
         jButton2.setText("Guardar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -97,6 +95,13 @@ public class Laboratorio7 extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cargar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -116,7 +121,7 @@ public class Laboratorio7 extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialog1Layout.createSequentialGroup()
+                            .addGroup(jDialog1Layout.createSequentialGroup()
                                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel15)
                                     .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +135,11 @@ public class Laboratorio7 extends javax.swing.JFrame {
                                     .addComponent(jTextField4)
                                     .addComponent(jSpinner3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                                     .addComponent(jTextField6)
-                                    .addComponent(jTextField7)))
+                                    .addComponent(jTextField7)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialog1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(55, 55, 55))))
         );
         jDialog1Layout.setVerticalGroup(
@@ -168,8 +173,8 @@ public class Laboratorio7 extends javax.swing.JFrame {
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -317,15 +322,21 @@ public class Laboratorio7 extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         String zona;
+        ArrayList<Persona> habitantes = new ArrayList<>();
+        for (Persona p : ap.getLista()) {
+            if (p.getLugar().equals(jTextField1.getText())) {
+                habitantes.add(p);
+            }
+        }
         if (jRadioButton1.isEnabled()) {
             zona = "Urbano";
-        }else{            
+        } else {
             zona = "Rural";
         }
-        lugares.add(new Lugar(jTextField1.getText(), jTextField2.getText(), (long )jSpinner1.getValue(), (long) jSpinner1.getValue(), zona, jDateChooser1.getDate()));
-        Lista jf = new Lista(lugares.get(lugares.size()-1));
-        jf.pack();
-        jf.setVisible(true);
+        lugares.add(new Lugar(jTextField1.getText(), jTextField2.getText(), (long) jSpinner1.getValue(), (long) jSpinner1.getValue(), zona, jDateChooser1.getDate()));
+        administradorTabla jf = new administradorTabla(new Lista(lugares.get(lugares.size() - 1),personas), personas);
+        jf.frame.pack();
+        jf.frame.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
@@ -336,19 +347,18 @@ public class Laboratorio7 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        int index=0;
-        for (Lugar l : lugares) {
-            if (jTextField5.getText().equals(l.toString())) {
-                index = lugares.indexOf(l);
-            }
-        }
-        personas.add(new Persona(jTextField3.getText(),jTextField4.getText(),lugares.get(index),(int)jSpinner3.getValue(),jTextField6.getText(),jTextField7.getText()));
+        ap.getLista().add(new Persona(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), (int) jSpinner3.getValue(), jTextField6.getText(), jTextField7.getText()));
+        ap.escribirArchivo();
         JOptionPane.showMessageDialog(this, "Ya");
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        personas = ap.getLista();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -384,8 +394,9 @@ public class Laboratorio7 extends javax.swing.JFrame {
             }
         });
     }
-    static ArrayList<Persona> personas = new ArrayList<>();
     static ArrayList<Lugar> lugares = new ArrayList<>();
+    ArrayList<Persona> personas = new ArrayList<>();
+    Administrador_Archivo ap = new Administrador_Archivo("./personas.lab");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;

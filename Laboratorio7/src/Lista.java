@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,13 +16,11 @@ public class Lista extends javax.swing.JFrame {
     /**
      * Creates new form Lista
      */
-    public Lista(Lugar lugar) {
+    public Lista(Lugar lugar, ArrayList<Persona> personas) {
         this.lugar = lugar;
         initComponents();
-        at = new administradorLista(jTable1);
-        ah = new administradorHabitantes();
+        at = new administradorLista(jTable1, personas);
         at.start();
-        ah.start();
     }
 
     /**
@@ -97,7 +98,7 @@ public class Lista extends javax.swing.JFrame {
 
     static Lugar lugar;
     administradorLista at;
-    administradorHabitantes ah;
+    ArrayList<Persona> personas;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
